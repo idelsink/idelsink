@@ -103,7 +103,7 @@ async function main() {
   // And be verbose to not 'accidentally' leak more information than I want to.
   pictureOfTheDayMetadata = {
     id: `${_.get(pictureOfTheDay, 'id', '')}`,
-    description: `${_.get(pictureOfTheDay, 'description', '')}`,
+    description: `${_.get(pictureOfTheDay, 'description', 'Picture of the Day')}`,
     mimeType: `${_.get(pictureOfTheDay, 'mimeType', '')}`,
     mediaMetadata: {
       creationTime: `${_.get(pictureOfTheDay, 'mediaMetadata.creationTime', '')}`,
@@ -113,6 +113,11 @@ async function main() {
     artifacts: {
       // The generated artifacts
     },
+    parsedMetadata: {
+      creationTimeDateString: _.get(pictureOfTheDay, 'mediaMetadata.creationTime') ?
+        new Date(_.get(pictureOfTheDay, 'mediaMetadata.creationTime')).toDateString() :
+        '',
+    }
   };
 
   downloadImage = async ({uri, destination}) => {
@@ -133,7 +138,7 @@ async function main() {
   };
 
   await new Promise((resolve, reject) => {
-    fs.mkdir(path.resolve(argv.directory), (err, directory) => {
+    fs.mkdir(path.resolve(argv.directory), { recursive: true }, (err, directory) => {
       if (err) {
         reject(err);
       } else {
@@ -159,9 +164,9 @@ async function main() {
         'This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License. ' +
         'To view a copy of this license, visit <http://creativecommons.org/licenses/by-sa/4.0/>',
       CreateDate: pictureOfTheDayMetadata.mediaMetadata.creationTime,
-      ImageDescription: pictureOfTheDayMetadata.description || 'Picture of the Day',
+      ImageDescription: _.get(pictureOfTheDayMetadata, 'description', 'Picture of the Day'),
       Software: 'Picture of the Day. <https://github.com/idelsink/idelsink>',
-      UserComment: pictureOfTheDayMetadata.description || 'Picture of the Day',
+      UserComment: _.get(pictureOfTheDayMetadata, 'description', 'Picture of the Day'),
     },
   };
 
@@ -189,4 +194,7 @@ async function main() {
   console.log(`Saved json metadata to '${path.resolve(argv.directory, argv.json)}'`);
 }
 
-main().catch(console.error);
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

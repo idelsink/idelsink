@@ -1,0 +1,69 @@
+name: Generate profile
+
+on:
+  workflow_dispatch:
+  schedule:
+    # At 01:13.
+    - cron: '13 1 * * *'
+
+jobs:
+  generate_profile:
+    name: Generate profile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: main
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install node dependencies
+        run: npm ci
+      - name: Get previous picture-of-the-day.json if available
+        run: >
+          mkdir -p picture-of-the-day &&
+          touch picture-of-the-day/picture-of-the-day.json &&
+          git show origin/profile:picture-of-the-day/picture-of-the-day.json > picture-of-the-day/picture-of-the-day.json || true
+      - name: Get picture of the Day
+        env: # Or as an environment variable
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: >
+          bin/picture-of-the-day.js
+          --output picture-of-the-day
+          --album 'Picture of the Day'
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - run: pip install jinja2-cli
+
+      - name: Generate input template file
+        run: >
+          jq --slurp
+          '{
+            potd: .[0],
+          }'
+          picture-of-the-day/picture-of-the-day.json
+          > jinja2_input.json
+
+      - name: Render README
+        run: >
+          jinja2
+          --outfile=README.md
+          TEMPLATE.md
+          jinja2_input.json
+
+      - uses: EndBug/add-and-commit@v8 # You can change this to use a specific version.
+        name: Commit files
+        with:
+          add: '.'
+          author_name: 'BotMar :)'
+          author_email: botmar@dels.ink
+          message: 'Publishing generated profile 🎉'
+          new_branch: profile
+          push: origin --set-upstream HEAD --force
