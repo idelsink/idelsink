@@ -1,8 +1,10 @@
 <h3 align="center">🖼️ Picture of the Day </h3>
 <figure align="center">
-  <a href="picture-of-the-day/{{ potd.artifacts.original }}">
-    <img src="picture-of-the-day/{{ potd.artifacts.minimized }}">
-  </a>
+  <p align="center">
+    <a href="picture-of-the-day/{{ potd.artifacts.original }}">
+      <img src="picture-of-the-day/{{ potd.artifacts.minimized }}">
+    </a>
+  </p>
   <figcaption align="center">
     <p align="center">
       <i>{{ potd.description }} <sub> - {{ potd.parsedMetadata.creationTimeDateString }}</sub></i>
