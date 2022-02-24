@@ -7,7 +7,8 @@
   </p>
   <figcaption align="center">
     <p align="center">
-      <i>{{ potd.description }} <sub> - {{ potd.parsedMetadata.creationTimeDateString }}</sub></i>
+      <i>{{ potd.description }}</i> <br />
+      <i><sub>{{ potd.parsedMetadata.creationTimeDateString }}</sub></i>
     </p>
 
   </figcaption>
