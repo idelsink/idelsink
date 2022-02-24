@@ -129,7 +129,7 @@ async function main() {
     response.data.pipe(fs.createWriteStream(destination));
     return new Promise((resolve, reject) => {
       response.data.on('end', () => {
-        resolve();
+        resolve(path.resolve(destination));
       });
       response.data.on('error', () => {
         reject();
@@ -170,22 +170,39 @@ async function main() {
     },
   };
 
+  const pictureOfTheDayPath = await downloadImage({
+    uri: `${pictureOfTheDay.baseUrl}=w${pictureOfTheDay.mediaMetadata.width}-h${pictureOfTheDay.mediaMetadata.height}`,
+    destination: path.resolve(tmpDir, `picture-of-the-day.${mime.extension(pictureOfTheDayMetadata.mimeType)}`)
+  });
+
   // Picture of the Day artifacts
   // artifact: original
   pictureOfTheDayMetadata.artifacts['original'] =
     `picture-of-the-day-original.${mime.extension(pictureOfTheDayMetadata.mimeType)}`;
-
-  await downloadImage({
-    uri: `${pictureOfTheDay.baseUrl}=w${pictureOfTheDay.mediaMetadata.width}-h${pictureOfTheDay.mediaMetadata.height}`,
-    destination: path.resolve(tmpDir, pictureOfTheDayMetadata.artifacts.original)
-  });
-
-  await sharp(path.resolve(tmpDir, pictureOfTheDayMetadata.artifacts.original))
+  await sharp(pictureOfTheDayPath)
     .withMetadata({
       exif: exifTags
     })
     .toFile(path.resolve(argv.directory, pictureOfTheDayMetadata.artifacts.original));
-  console.info(`Saved original to '${path.resolve(argv.directory, pictureOfTheDayMetadata.artifacts.original)}'`);
+  console.info(`Generated ${pictureOfTheDayMetadata.artifacts.original}`);
+
+  // artifact: minimized
+  pictureOfTheDayMetadata.artifacts['minimized'] =
+    `picture-of-the-day-minimized.webp`;
+  await sharp(pictureOfTheDayPath)
+    .resize({
+      width: 800,
+      height: 800,
+      fit: 'inside',
+    })
+    .webp({
+      quality: 80,
+    })
+    .withMetadata({
+      exif: exifTags
+    })
+    .toFile(path.resolve(argv.directory, pictureOfTheDayMetadata.artifacts.minimized));
+  console.info(`Generated ${pictureOfTheDayMetadata.artifacts.minimized}`);
 
   await fs.promises.writeFile(
     path.resolve(argv.directory, argv.json),
