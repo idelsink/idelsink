@@ -62,7 +62,7 @@ jobs:
         name: Commit files
         with:
           add: '.'
-          author_name: 'BotMar :)'
+          author_name: 'Botmar 🤖'
           author_email: botmar@dels.ink
           message: 'Publishing generated profile 🎉'
           new_branch: profile
