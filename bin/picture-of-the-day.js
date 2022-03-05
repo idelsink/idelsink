@@ -189,6 +189,8 @@ async function main() {
     destination: path.resolve(tmpDir, `picture-of-the-day.${mime.extension(pictureOfTheDayMetadata.mimeType)}`)
   });
 
+  console.info(`Saving files to '${path.resolve(argv.directory)}/'`);
+
   // Picture of the Day artifacts
   // artifact: original
   pictureOfTheDayMetadata.artifacts['original'] =
