@@ -14,11 +14,24 @@ const sharp = require('sharp');
 const yargs = require('yargs/yargs');
 
 const argv = yargs(hideBin(process.argv))
+  .env('PICTURE_OF_THE_DAY')
   .usage('Usage: $0 [options]')
   .option('album', {
     describe: 'The Google Photos album to select a random picture.',
     default: 'Picture of the Day',
     type: 'string',
+  })
+  .option('googleClientId', {
+    describe: 'Google Client ID.',
+    type: 'string'
+  })
+  .option('googleClientSecret', {
+    describe: 'Google Client Secret.',
+    type: 'string'
+  })
+  .option('googleRefreshToken', {
+    describe: 'Google refresh token.',
+    type: 'string'
   })
   .option('output', {
     alias: 'directory',
@@ -26,24 +39,25 @@ const argv = yargs(hideBin(process.argv))
     default: '',
     type: 'string'
   })
-  .option('json', {
-    describe: 'Filename to store the JSON information to.',
-    default: 'picture-of-the-day.json',
-    type: 'string'
-  })
+  .demandOption([
+    'googleClientId',
+    'googleClientSecret',
+    'googleRefreshToken',
+  ])
   .argv;
+const metadataFilename = 'picture-of-the-day.json';
 
 async function main() {
   console.log('Picture of the Day!');
 
   // Authenticate the client
   const oauth2Client = new google.auth.OAuth2(
-    process.env.GOOGLE_CLIENT_ID,
-    process.env.GOOGLE_CLIENT_SECRET,
+    argv.googleClientId,
+    argv.googleClientSecret,
     "",
   );
   oauth2Client.setCredentials({
-    refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
+    refresh_token: argv.googleRefreshToken,
   });
   const tokens = await oauth2Client.refreshAccessToken();
 
@@ -205,10 +219,10 @@ async function main() {
   console.info(`Generated ${pictureOfTheDayMetadata.artifacts.minimized}`);
 
   await fs.promises.writeFile(
-    path.resolve(argv.directory, argv.json),
+    path.resolve(argv.directory, metadataFilename),
     JSON.stringify(pictureOfTheDayMetadata, null, 2),
   );
-  console.log(`Saved json metadata to '${path.resolve(argv.directory, argv.json)}'`);
+  console.log(`Generated metadata file ${metadataFilename}`);
 }
 
 main().catch((e) => {
