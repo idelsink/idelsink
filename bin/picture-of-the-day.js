@@ -176,7 +176,7 @@ async function main() {
       Artist: 'Ingmar Delsink',
       Copyright:
         'This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License. ' +
-        'To view a copy of this license, visit <http://creativecommons.org/licenses/by-sa/4.0/>',
+        'To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/',
       CreateDate: pictureOfTheDayMetadata.mediaMetadata.creationTime,
       ImageDescription: _.get(pictureOfTheDayMetadata, 'description', 'Picture of the Day'),
       Software: 'Picture of the Day. <https://github.com/idelsink/idelsink>',
