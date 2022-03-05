@@ -86,31 +86,35 @@ async function main() {
   };
   const mediaItems = await getAllMediaItems(album.id, 50);
 
+  let previousIds = [];
+  try {
+    const previousMetadata = require(path.resolve(argv.directory, metadataFilename));
+    previousIds = _.compact(_.concat(
+      _.get(previousMetadata, 'previousIds', []),
+      _.get(previousMetadata, 'id'),
+    ));
+  } catch (e) {
+    // The file might not be available, that is ok.
+  }
+  let unseenMediaItems = _.filter(mediaItems, (o) => !_.includes(previousIds, o.id));
+
+  if (!_.size(unseenMediaItems)) {
+    console.info('All the items have been seen, starting over!')
+    previousIds = [];
+    unseenMediaItems = mediaItems;
+  }
+
   let pictureOfTheDay;
   let pictureOfTheDayMetadata = {};
 
-  if (!_.size(mediaItems)) {
+  if (!_.size(unseenMediaItems)) {
     console.error(`Could not get any pictures from the ${argv.album} album.`);
     process.exit(1);
-  } else if (_.size(mediaItems) == 1) {
-    console.info(`Only a single mediaItem available. There goes your randomness :')`);
-    pictureOfTheDay = _.first(mediaItems);
+  } else if (_.size(unseenMediaItems) == 1) {
+    console.info(`Only a single item available. There goes your randomness :')`);
+    pictureOfTheDay = _.first(unseenMediaItems);
   } else {
-    // Select a random new picture.
-    // If there is an JSON file available, is it to get a new image
-    const getRandomMediaItem = () => {
-      let previousId;
-      try {
-        previousId = _.get(require(path.resolve(argv.directory, argv.json)), 'id')
-      } catch (e) {
-        // The file might not be available, that is ok.
-      }
-      const item = _.first(_.shuffle(mediaItems));
-      return item.id !== previousId ?
-        item :
-        getRandomMediaItem(previousId);
-    };
-    pictureOfTheDay = getRandomMediaItem();
+    pictureOfTheDay = _.first(_.shuffle(unseenMediaItems));
   }
 
   // Store mediaMetadata
@@ -131,7 +135,8 @@ async function main() {
       creationTimeDateString: _.get(pictureOfTheDay, 'mediaMetadata.creationTime') ?
         new Date(_.get(pictureOfTheDay, 'mediaMetadata.creationTime')).toDateString() :
         '',
-    }
+    },
+    previousIds: previousIds,
   };
 
   downloadImage = async ({uri, destination}) => {
