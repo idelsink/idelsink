@@ -1,0 +1,27 @@
+name: Generate profile
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+    - run: pip install jinja2-cli
+    - name: Generate input template file
+      run: >
+        jq --slurp
+        '{
+          potd: .[0],
+          reactions: {
+            potd: [1],
+          },
+        }'
+        picture-of-the-day/picture-of-the-day.json
+        reactions/picture-of-the-day.json
+        > jinja2_input.json
+
+    - name: Render README
+      run: >
+        jinja2
+        --outfile=README.md
+        TEMPLATE.md
+        jinja2_input.json

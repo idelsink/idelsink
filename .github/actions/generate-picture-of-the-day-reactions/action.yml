@@ -1,0 +1,17 @@
+name: Generate Picture of the Day reactions
+runs:
+  using: "composite"
+  steps:
+    - name: Setup node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+    - name: Install node dependencies
+      run: npm ci
+    - run: mkdir -p reactions
+    - name: Get picture of the day Reactions
+      run: >
+        bin/reactions.js
+        --reactionId $(jq --raw-output '.id' picture-of-the-day/picture-of-the-day.json)
+        --additionalIssueLabel 'reaction:type: picture-of-the-day'
+        --output reactions/picture-of-the-day.json
