@@ -28,10 +28,10 @@ jobs:
           touch picture-of-the-day/picture-of-the-day.json &&
           git show origin/profile:picture-of-the-day/picture-of-the-day.json > picture-of-the-day/picture-of-the-day.json || true
       - name: Get picture of the Day
-        env: # Or as an environment variable
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        env:
+          PICTURE_OF_THE_DAY_GOOGLE_CLIENT_ID: ${{ secrets.PICTURE_OF_THE_DAY_GOOGLE_CLIENT_ID }}
+          PICTURE_OF_THE_DAY_GOOGLE_CLIENT_SECRET: ${{ secrets.PICTURE_OF_THE_DAY_GOOGLE_CLIENT_SECRET }}
+          PICTURE_OF_THE_DAY_GOOGLE_REFRESH_TOKEN: ${{ secrets.PICTURE_OF_THE_DAY_GOOGLE_REFRESH_TOKEN }}
         run: >
           bin/picture-of-the-day.js
           --output picture-of-the-day
@@ -58,7 +58,7 @@ jobs:
           TEMPLATE.md
           jinja2_input.json
 
-      - uses: EndBug/add-and-commit@v8 # You can change this to use a specific version.
+      - uses: EndBug/add-and-commit@v8
         name: Commit files
         with:
           add: '.'
