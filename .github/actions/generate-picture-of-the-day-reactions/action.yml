@@ -18,11 +18,11 @@ runs:
     - run: mkdir -p reactions
       shell: bash
     - name: Get picture of the day Reactions
-      env:
-        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       shell: bash
       run: >
         bin/reactions.js
         --reactionId $(jq --raw-output '.id' picture-of-the-day/picture-of-the-day.json)
         --additionalIssueLabel 'reaction:type: picture-of-the-day'
+        --githubToken ${{ inputs.GITHUB_TOKEN }}
+        --githubRepository $(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2})
         --output reactions/picture-of-the-day.json
