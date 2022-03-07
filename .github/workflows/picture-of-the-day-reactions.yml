@@ -4,7 +4,6 @@ concurrency:
   group: singular
 
 on:
-  workflow_dispatch:
   issues:
     types: [ labeled ]
 
