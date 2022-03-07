@@ -12,8 +12,6 @@ runs:
     - run: mkdir -p reactions
       shell: bash
     - name: Get picture of the day Reactions
-      env:
-        REACTIONS_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       shell: bash
       run: >
         bin/reactions.js
