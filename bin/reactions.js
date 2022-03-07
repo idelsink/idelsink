@@ -11,8 +11,17 @@ const yargs = require('yargs/yargs');
 
 const argv = yargs(hideBin(process.argv))
   .env('REACTIONS')
-  .env('GITHUB')
   .usage('Usage: $0 [options]')
+  .option('allowedReactions', {
+    describe: 'Allowed reactions',
+    default: ['👍'],
+    type: 'array',
+    coerce: (option) => {
+      return _.chain(option)
+      .words()
+      .value()
+    },
+  })
   .option('allowedReactions', {
     describe: 'Allowed reactions',
     default: ['👍'],
@@ -42,6 +51,7 @@ const argv = yargs(hideBin(process.argv))
   })
   .option('reactionId', {
     describe: 'The reaction identifier',
+    default: '',
     type: 'string',
   })
   .demandOption([
@@ -145,15 +155,14 @@ async function main() {
         issue_number: issue.number,
         state: 'closed',
         body:
-          issue.body ?
-            issue.body + `\n` :
-            '' +
-          `<details>\n` +
-          `\n` +
-          '```json\n' +
-          `${JSON.stringify(issueMetadata, null, 2)}\n` +
-          '```\n' +
-          `</details>\n`,
+          (_.isNil(issue.body) ? '' : issue.body) +
+            '\n' +
+            `<details>\n` +
+            `\n` +
+            '```json\n' +
+            `${JSON.stringify(issueMetadata, null, 2)}\n` +
+            '```\n' +
+            `</details>\n`,
         labels: [
           ...argv.additionalIssueLabel,
           'type: reaction',
@@ -176,7 +185,7 @@ async function main() {
   }
 
   // Give GitHub a bit of time to process potential changes
-  await new Promise(r => setTimeout(r, 1000));
+  await new Promise(r => setTimeout(r, 5000));
 
   const reactions = _.chain(await octokit.paginate(octokit.rest.issues.listForRepo, {
     owner: argv.githubRepositoryOwner,
@@ -212,8 +221,7 @@ async function main() {
       reactions: reactions,
     };
   })
-  .values()
-  .value()
+  .value();
 
   await fs.promises.writeFile(
     path.resolve(argv.output),

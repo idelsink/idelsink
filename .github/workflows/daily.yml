@@ -1,0 +1,21 @@
+name: Daily
+
+concurrency:
+  group: singular
+
+on:
+  workflow_dispatch:
+  schedule:
+    # At 01:13.
+    - cron: '13 1 * * *'
+
+jobs:
+  generate-profile:
+    uses: idelsink/idelsink/.github/workflows/generate-profile.yml@main
+    with:
+      download-picture-of-the-day: true
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      google-client-id: ${{ secrets.PICTURE_OF_THE_DAY_GOOGLE_CLIENT_ID }}
+      google-client-secret: ${{ secrets.PICTURE_OF_THE_DAY_GOOGLE_CLIENT_SECRET }}
+      google-refresh-token: ${{ secrets.PICTURE_OF_THE_DAY_GOOGLE_REFRESH_TOKEN }}

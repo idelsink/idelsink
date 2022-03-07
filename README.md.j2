@@ -1,0 +1,26 @@
+<h3 align="center">🖼️ Picture of the Day </h3>
+<figure align="center">
+  <p align="center">
+    <a href="https://raw.githubusercontent.com/idelsink/idelsink/profile/artifacts/picture-of-the-day/{{ potd.artifacts.original }}">
+      <img src="artifacts/picture-of-the-day/{{ potd.artifacts.minimized }}">
+    </a>
+  </p>
+  <figcaption align="center">
+    <p align="center">
+      {% for allowedReaction in allowedReactions -%}
+      {%- set label = allowedReaction -%}
+      {%- set message = (((reactions.potd[allowedReaction]|default(dict()) )['count'])|default(0)) -%}
+        <a href="https://github.com/idelsink/idelsink/issues/new?title={{ label|urlencode }}&body={{ 'You can leave a message here!'|urlencode }}&labels={{ 'type: reaction, reaction:type: picture-of-the-day'|urlencode }}&template=picture-of-the-day-reaction.md" alt="{{ label }}">
+          <img src="https://img.shields.io/static/v1?label={{ label|urlencode }}&message={{ message|urlencode }}&color=blue&style=flat">
+        </a>
+      {%- endfor %}<br />
+      <i>{{ potd.description }}</i><br />
+      <i><sub>{{ potd.parsedMetadata.creationTimeDateString }}</sub></i> <br />
+    </p>
+
+  </figcaption>
+
+  <blockquote align="left">
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/StillImage" rel="dct:type">work</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Ingmar Delsink</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+  </blockquote>
+</figure>

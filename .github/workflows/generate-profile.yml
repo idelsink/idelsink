@@ -1,0 +1,135 @@
+name: Generate profile
+
+on:
+  workflow_call:
+    inputs:
+      picture-of-the-day-album:
+        default: 'Picture of the Day'
+        type: string
+      download-picture-of-the-day:
+        default: true
+        type: boolean
+    secrets:
+      github-token:
+        required: true
+      google-client-id:
+        required: true
+      google-client-secret:
+        required: true
+      google-refresh-token:
+        required: true
+
+jobs:
+  prepare-artifacts:
+    name: Prepare artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: profile
+      - name: Prepare directory with placeholder files if applicable
+        run: |
+          mkdir -p artifacts/picture-of-the-day/
+          touch artifacts/picture-of-the-day/picture-of-the-day.json
+          mkdir -p artifacts/reactions/
+          touch artifacts/reactions/picture-of-the-day.json
+          mkdir -p artifacts/allowed-reactions/
+          touch artifacts/allowed-reactions/allowed-reactions.json
+      - name: Remove Picture of the Day image artifacts
+        if: ${{ inputs.download-picture-of-the-day == true }}
+        run: |
+          rm -rf artifacts/picture-of-the-day/
+          git checkout artifacts/picture-of-the-day/picture-of-the-day.json
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          path: artifacts/
+
+  generate_profile:
+    name: Generate profile
+    needs: prepare-artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: artifacts
+          path: artifacts
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
+      - name: Install node dependencies
+        run: npm ci
+      - name: Get picture of the Day
+        if: ${{ inputs.download-picture-of-the-day == true }}
+        env:
+          PICTURE_OF_THE_DAY_GOOGLE_CLIENT_ID: ${{ secrets.google-client-id }}
+          PICTURE_OF_THE_DAY_GOOGLE_CLIENT_SECRET: ${{ secrets.google-client-secret }}
+          PICTURE_OF_THE_DAY_GOOGLE_REFRESH_TOKEN: ${{ secrets.google-refresh-token }}
+        run: >
+          bin/picture-of-the-day.js
+          --output artifacts/picture-of-the-day
+          --album '${{ inputs.picture-of-the-day-album }}'
+      - name: Generate allowed reactions
+        run: >
+          bin/allowed-reactions.js
+          --input "🎉🔥😍😱❤️"
+          --input "$(jq --raw-output '.description' artifacts/picture-of-the-day/picture-of-the-day.json)"
+          --output artifacts/allowed-reactions/allowed-reactions.json
+      - name: Generate reactions
+        run: >
+          bin/reactions.js
+          --reactionId $(jq --raw-output '.id' artifacts/picture-of-the-day/picture-of-the-day.json)
+          --allowedReactions "$(jq -r '. | join("")' artifacts/allowed-reactions/allowed-reactions.json)"
+          --additionalIssueLabel 'reaction:type: picture-of-the-day'
+          --githubToken ${{ secrets.github-token }}
+          --githubRepositoryOwner idelsink
+          --githubRepository idelsink
+          --output artifacts/reactions/picture-of-the-day.json
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install python dependencies
+        run: pip install jinja2-cli
+      - name: Generate Jinja2 input template file
+        run: >
+          jq --slurp
+          '{
+            potd: .[0],
+            allowedReactions: .[1],
+            reactions: {
+              potd: .[2],
+            },
+          }'
+          artifacts/picture-of-the-day/picture-of-the-day.json
+          artifacts/allowed-reactions/allowed-reactions.json
+          artifacts/reactions/picture-of-the-day.json
+          > artifacts/api.json
+      - name: Render README
+        run: >
+          jinja2
+          --outfile=README.md
+          README.md.j2
+          artifacts/api.json
+      - uses: EndBug/add-and-commit@v8
+        name: Commit files
+        with:
+          add: '.'
+          author_name: 'Botmar 🤖'
+          author_email: '🤖@dels.ink'
+          message: 'Publishing generated profile 🎉'
+          new_branch: profile
+          push: origin --set-upstream HEAD --force

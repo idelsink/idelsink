@@ -1,0 +1,20 @@
+name: On labeled
+
+concurrency:
+  group: singular
+
+on:
+  issues:
+    types: [ labeled ]
+
+jobs:
+  generate-profile:
+    if: "github.event.label.name == 'reaction:type: picture-of-the-day'"
+    uses: idelsink/idelsink/.github/workflows/generate-profile.yml@main
+    with:
+      download-picture-of-the-day: false
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      google-client-id: ${{ secrets.PICTURE_OF_THE_DAY_GOOGLE_CLIENT_ID }}
+      google-client-secret: ${{ secrets.PICTURE_OF_THE_DAY_GOOGLE_CLIENT_SECRET }}
+      google-refresh-token: ${{ secrets.PICTURE_OF_THE_DAY_GOOGLE_REFRESH_TOKEN }}
