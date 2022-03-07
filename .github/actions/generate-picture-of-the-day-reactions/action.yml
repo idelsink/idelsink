@@ -7,9 +7,12 @@ runs:
       with:
         node-version: '16'
     - name: Install node dependencies
+      shell: bash
       run: npm ci
     - run: mkdir -p reactions
+      shell: bash
     - name: Get picture of the day Reactions
+      shell: bash
       run: >
         bin/reactions.js
         --reactionId $(jq --raw-output '.id' picture-of-the-day/picture-of-the-day.json)

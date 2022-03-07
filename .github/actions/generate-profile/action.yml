@@ -6,7 +6,9 @@ runs:
       with:
         python-version: '3.9'
     - run: pip install jinja2-cli
+      shell: bash
     - name: Generate input template file
+      shell: bash
       run: >
         jq --slurp
         '{
@@ -20,6 +22,7 @@ runs:
         > jinja2_input.json
 
     - name: Render README
+      shell: bash
       run: >
         jinja2
         --outfile=README.md

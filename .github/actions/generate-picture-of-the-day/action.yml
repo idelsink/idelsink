@@ -7,8 +7,10 @@ runs:
       with:
         node-version: '16'
     - name: Install node dependencies
+      shell: bash
       run: npm ci
     - name: Get previous picture-of-the-day.json if available
+      shell: bash
       run: >
         mkdir -p picture-of-the-day &&
         touch picture-of-the-day/picture-of-the-day.json &&
@@ -18,6 +20,7 @@ runs:
         PICTURE_OF_THE_DAY_GOOGLE_CLIENT_ID: ${{ secrets.PICTURE_OF_THE_DAY_GOOGLE_CLIENT_ID }}
         PICTURE_OF_THE_DAY_GOOGLE_CLIENT_SECRET: ${{ secrets.PICTURE_OF_THE_DAY_GOOGLE_CLIENT_SECRET }}
         PICTURE_OF_THE_DAY_GOOGLE_REFRESH_TOKEN: ${{ secrets.PICTURE_OF_THE_DAY_GOOGLE_REFRESH_TOKEN }}
+      shell: bash
       run: >
         bin/picture-of-the-day.js
         --output picture-of-the-day
