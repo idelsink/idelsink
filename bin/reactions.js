@@ -145,8 +145,9 @@ async function main() {
         issue_number: issue.number,
         state: 'closed',
         body:
-          issue.body +
-          `\n` +
+          issue.body ?
+            issue.body + `\n` :
+            '' +
           `<details>\n` +
           `\n` +
           '```json\n' +
