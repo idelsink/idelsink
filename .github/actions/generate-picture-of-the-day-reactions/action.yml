@@ -1,4 +1,10 @@
 name: Generate Picture of the Day reactions
+
+inputs:
+  GITHUB_TOKEN:
+    description: 'A Github PAT'
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -12,6 +18,8 @@ runs:
     - run: mkdir -p reactions
       shell: bash
     - name: Get picture of the day Reactions
+      env:
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       shell: bash
       run: >
         bin/reactions.js

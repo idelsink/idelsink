@@ -20,6 +20,8 @@ jobs:
           fetch-depth: 0
           ref: profile
       - uses: ./.github/actions/generate-picture-of-the-day-reactions
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: ./.github/actions/generate-profile
       - uses: EndBug/add-and-commit@v8
         name: Commit files
