@@ -8,6 +8,7 @@ const {hideBin} = require('yargs/helpers');
 const fs = require('fs');
 const path = require("path");
 const yargs = require('yargs/yargs');
+const emojiRegex = require("emoji-regex");
 
 const argv = yargs(hideBin(process.argv))
   .env('REACTIONS')
@@ -16,16 +17,12 @@ const argv = yargs(hideBin(process.argv))
     describe: 'Allowed reactions',
     default: ['👍'],
     type: 'array',
-    coerce: (option) => {
-      return _.chain(option)
-      .words()
-      .value()
+    coerce: (input) => {
+      const inputString = _.concat(input).join('');
+      const regexp = emojiRegex();
+      const allowedReactions = Array.from(inputString.matchAll(regexp), m => m[0]);
+      return allowedReactions;
     },
-  })
-  .option('allowedReactions', {
-    describe: 'Allowed reactions',
-    default: ['👍'],
-    type: 'array',
   })
   .option('githubRepository', {
     describe: 'GitHub repository',

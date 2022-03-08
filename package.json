@@ -8,6 +8,7 @@
     "@octokit/rest": "^18.12.0",
     "axios": "^0.26.0",
     "dotenv": "^16.0.0",
+    "emoji-regex": "^10.0.1",
     "google-auth-library": "^7.12.0",
     "googleapis": "^95.0.0",
     "googlephotos": "^0.3.4",

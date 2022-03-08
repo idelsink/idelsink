@@ -6,6 +6,7 @@ const {hideBin} = require('yargs/helpers');
 const fs = require('fs');
 const path = require("path");
 const yargs = require('yargs/yargs');
+const emojiRegex = require("emoji-regex");
 
 const argv = yargs(hideBin(process.argv))
   .env('ALLOWED_REACTIONS')
@@ -27,13 +28,9 @@ const argv = yargs(hideBin(process.argv))
 async function main() {
   console.log('Allowed reactions!');
 
-  const allowedReactions = _.chain(argv.input)
-    .map(input => input.match(/\p{Emoji}+/gu))
-    .flatten()
-    .compact()
-    .words()
-    .uniq()
-    .value();
+  const inputString = _.concat(argv.input).join('');
+  const regexp = emojiRegex();
+  const allowedReactions = Array.from(inputString.matchAll(regexp), m => m[0]);
 
   console.info('Allowed reactions', allowedReactions);
 
