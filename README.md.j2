@@ -11,7 +11,7 @@
       {%- set label = allowedReaction -%}
       {%- set message = (((reactions.potd[allowedReaction]|default(dict()) )['count'])|default(0)) -%}
         <a href="https://github.com/idelsink/idelsink/issues/new?title={{ label|urlencode }}&body={{ 'You can leave a message here!'|urlencode }}&labels={{ 'type: reaction, reaction:type: picture-of-the-day'|urlencode }}&template=picture-of-the-day-reaction.md" alt="{{ label }}">
-          <img src="https://img.shields.io/static/v1?label={{ label|urlencode }}&message={{ message|urlencode }}&color=blue&style=flat">
+          <img src="https://raster.shields.io/static/v1?label={{ label|urlencode }}&message={{ message|urlencode }}&color=blue&style=flat">
         </a>
       {%- endfor %}<br />
       <i>{{ potd.description }}</i><br />
