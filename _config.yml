@@ -1,2 +1,5 @@
+# Disable the header
+name: ""
+title: null
 exclude:
   - README.md.j2
