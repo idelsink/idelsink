@@ -9,7 +9,6 @@ const fs = require('fs');
 const mime = require('mime-types');
 const os = require('os');
 const path = require("path");
-const Photos = require('googlephotos');
 const sharp = require('sharp');
 const yargs = require('yargs/yargs');
 
@@ -47,6 +46,73 @@ const argv = yargs(hideBin(process.argv))
   .argv;
 const metadataFilename = 'picture-of-the-day.json';
 
+const listAlbums = async ({
+  serviceEndpoint = 'https://photoslibrary.googleapis.com',
+  bearerToken,
+  pageSize = 50,
+  pageToken,
+  excludeNonAppCreatedData,
+}) => {
+  const response = await axios({
+    method: 'GET',
+    url: `${serviceEndpoint}/v1/albums`,
+    responseType: 'json',
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+      ..._.omitBy({
+        pageSize,
+        pageToken,
+        excludeNonAppCreatedData,
+      }, _.isNil),
+    },
+  });
+  return _.has(response, 'data.nextPageToken') ?
+    _.concat(
+      _.get(response, 'data.albums', []),
+      await listAlbums({pageSize, pageToken: response.data.nextPageToken, excludeNonAppCreatedData}),
+    ) :
+    _.get(response, 'data.albums', []);
+};
+const searchMediaItems = async ({
+  serviceEndpoint = 'https://photoslibrary.googleapis.com',
+  bearerToken,
+  albumId,
+  pageSize = 50,
+  pageToken,
+  filters,
+  orderBy,
+}) => {
+  const response = await axios({
+    method: 'POST',
+    url: `${serviceEndpoint}/v1/mediaItems:search`,
+    responseType: 'json',
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+    data: {
+      ..._.omitBy({
+        albumId,
+        pageSize,
+        pageToken,
+        filters,
+        orderBy,
+      }, _.isNil),
+    },
+  });
+  return _.has(response, 'data.nextPageToken') ?
+    _.concat(
+      _.get(response, 'data.mediaItems', []),
+      await listAlbums({
+        albumId,
+        pageSize,
+        pageToken: response.data.nextPageToken,
+        filters,
+        orderBy,
+      }),
+    ) :
+    _.get(response, 'data.mediaItems', []);
+};
+
 async function main() {
   console.log('Picture of the Day!');
 
@@ -61,15 +127,9 @@ async function main() {
   });
   const tokens = await oauth2Client.refreshAccessToken();
 
-  const photos = new Photos(tokens.credentials.access_token);
-
-  const getAllAlbums = async (pageSize, nextPageToken) => {
-    const result = await photos.albums.list(pageSize, nextPageToken);
-    return result.nextPageToken ?
-      result.albums.concat(await getAllAlbums(pageSize, result.nextPageToken)) :
-      result.albums;
-  };
-  const albums = await getAllAlbums(50);
+  const albums = await listAlbums({
+    bearerToken: tokens.credentials.access_token,
+  });
 
   let album = _.find(albums, 'title', argv.album);
   if (!album) {
@@ -77,14 +137,10 @@ async function main() {
     process.exit(0);
   }
 
-  // Get all media items and select a Picture of the Day
-  const getAllMediaItems = async (albumId, pageSize, nextPageToken) => {
-    const result = await photos.mediaItems.search(albumId, pageSize, nextPageToken);
-    return result.nextPageToken ?
-      result.mediaItems.concat(await getAllMediaItems(albumId, pageSize, result.nextPageToken)) :
-      result.mediaItems;
-  };
-  const mediaItems = await getAllMediaItems(album.id, 50);
+  const mediaItems = await searchMediaItems({
+    bearerToken: tokens.credentials.access_token,
+    albumId: album.id,
+  });
 
   let previousIds = [];
   try {
