@@ -240,7 +240,7 @@ async function main() {
         'To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/',
       CreateDate: pictureOfTheDayMetadata.mediaMetadata.creationTime,
       ImageDescription: _.get(pictureOfTheDayMetadata, 'description', 'Picture of the Day'),
-      Software: 'Picture of the Day. <https://github.com/idelsink/idelsink>',
+      Software: 'Picture of the Day. https://github.com/idelsink/idelsink',
       UserComment: _.get(pictureOfTheDayMetadata, 'description', 'Picture of the Day'),
     },
   };
