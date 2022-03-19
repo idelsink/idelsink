@@ -269,7 +269,7 @@ async function main() {
   await sharp(pictureOfTheDayPath)
     .resize({
       width: 800,
-      height: 800,
+      height: 400,
       fit: 'inside',
     })
     .webp({
