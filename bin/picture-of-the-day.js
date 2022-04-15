@@ -212,25 +212,9 @@ async function main() {
     });
   };
 
-  await new Promise((resolve, reject) => {
-    fs.mkdir(path.resolve(argv.directory), { recursive: true }, (err, directory) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(directory)
-      };
-    });
-  });
+  await fs.promises.mkdir(path.resolve(argv.directory), { recursive: true });
 
-  const tmpDir = await new Promise((resolve, reject) => {
-    fs.mkdtemp(path.join(os.tmpdir(), 'potd-'), (err, directory) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(directory)
-      };
-    });
-  });
+  const tmpDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'potd-'));
 
   const exifTags = {
     IFD0: {

@@ -219,7 +219,7 @@ async function main() {
     };
   })
   .value();
-
+  await fs.promises.mkdir(path.resolve(path.dirname(argv.output)), { recursive: true });
   await fs.promises.writeFile(
     path.resolve(argv.output),
     JSON.stringify(reactions, null, 2),

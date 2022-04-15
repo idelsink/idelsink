@@ -34,6 +34,7 @@ async function main() {
 
   console.info('Allowed reactions', allowedReactions);
 
+  await fs.promises.mkdir(path.resolve(path.dirname(argv.output)), { recursive: true });
   await fs.promises.writeFile(
     path.resolve(argv.output),
     JSON.stringify(allowedReactions, null, 2),
