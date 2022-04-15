@@ -273,7 +273,7 @@ async function main() {
       fit: 'inside',
     })
     .webp({
-      quality: 80,
+      quality: 100,
     })
     .withMetadata({
       exif: exifTags
