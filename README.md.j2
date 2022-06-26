@@ -14,7 +14,7 @@
           <img src="https://raster.shields.io/static/v1?label={{ label|urlencode }}&message={{ message|urlencode }}&color=blue&style=flat">
         </a>
       {%- endfor %}<br />
-      <i>{{ potd.description }}</i><br />
+      <i>{{ potd.description|replace("\n", "<br />") }}</i><br />
       <i><sub>{{ potd.parsedMetadata.creationTimeDateString }}</sub></i><br />
       <sub>
         This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
