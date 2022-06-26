@@ -7,7 +7,7 @@
   </p>
   <figcaption align="center">
     <p align="center">
-      {% for allowedReaction in allowedReactions -%}
+      {% for allowedReaction in allowedReactions|unique|list -%}
       {%- set label = allowedReaction -%}
       {%- set message = (((reactions.potd[allowedReaction]|default(dict()) )['count'])|default(0)) -%}
         <a href="https://github.com/idelsink/idelsink/issues/new?title={{ label|urlencode }}&body={{ 'You can leave a message here!'|urlencode }}&labels={{ 'type: reaction, reaction:type: picture-of-the-day'|urlencode }}&template=picture-of-the-day-reaction.md" alt="{{ label }}">
