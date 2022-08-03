@@ -1,0 +1,32 @@
+{
+  "☕": {
+    "count": 1,
+    "reaction": "☕",
+    "reactions": [
+      {
+        "reaction": "☕",
+        "url": "https://api.github.com/repos/idelsink/idelsink/issues/74",
+        "number": 74,
+        "user": {
+          "login": "idelsink",
+          "url": "https://api.github.com/users/idelsink"
+        }
+      }
+    ]
+  },
+  "❤️": {
+    "count": 1,
+    "reaction": "❤️",
+    "reactions": [
+      {
+        "reaction": "❤️",
+        "url": "https://api.github.com/repos/idelsink/idelsink/issues/76",
+        "number": 76,
+        "user": {
+          "login": "hetisthijs",
+          "url": "https://api.github.com/users/hetisthijs"
+        }
+      }
+    ]
+  }
+}
