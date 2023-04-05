@@ -252,8 +252,8 @@ async function main() {
     `picture-of-the-day-minimized.webp`;
   await sharp(pictureOfTheDayPath)
     .resize({
-      width: 800,
-      height: 400,
+      width: 1000,
+      height: 1000,
       fit: 'inside',
     })
     .webp({

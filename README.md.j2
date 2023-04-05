@@ -2,7 +2,7 @@
 <figure align="center">
   <p align="center">
     <a href="https://raw.githubusercontent.com/idelsink/idelsink/profile/artifacts/picture-of-the-day/{{ potd.artifacts.original }}">
-      <img src="https://raw.githubusercontent.com/idelsink/idelsink/profile/artifacts/picture-of-the-day/{{ potd.artifacts.minimized }}">
+      <img src="https://raw.githubusercontent.com/idelsink/idelsink/profile/artifacts/picture-of-the-day/{{ potd.artifacts.minimized }}" {{ 'width="400"' if (potd.mediaMetadata.width|int / potd.mediaMetadata.height|int) > (400 / 800) else 'height="800"' }}>
     </a>
   </p>
   <figcaption align="center">
