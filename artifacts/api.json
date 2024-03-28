@@ -1,0 +1,34 @@
+{
+  "potd": {
+    "id": "AJ7Niakxp6Gvmrku3rhRabAZUNp_Gc_6szjHyOqWL8dNAV2MGEkNFzdXhxR24OiGTvjo5ppoM09-",
+    "description": "Siemensstadt station 🚉 - abandoned station part of the 4.5 km rapid transit line of the Berlin S-Bahn in Berlin. It gave workers better access to the industrial area. There are current plans to renovate and reactivate the line.",
+    "mimeType": "image/jpeg",
+    "mediaMetadata": {
+      "creationTime": "2022-11-13T16:01:18Z",
+      "width": "4032",
+      "height": "3024"
+    },
+    "artifacts": {
+      "original": "picture-of-the-day-original.jpeg",
+      "minimized": "picture-of-the-day-minimized.webp"
+    },
+    "parsedMetadata": {
+      "creationTimeDateString": "Sun Nov 13 2022"
+    },
+    "previousIds": [
+      "AJ7NialnxVb9OL6ycOL2FCmH0gDDSZH8bXLQSJuPYcYs8wHf7Ywe8am3EflW3mlgS-8brjy2mU8e",
+      "AJ7NianNQX9nW7hO5-Q0PBieondbSw0IYUgG2T6Z3FcAVSkpcEtECQwh83OI2HzdvcBy8SuUxez9"
+    ]
+  },
+  "allowedReactions": [
+    "🎉",
+    "🔥",
+    "😍",
+    "😱",
+    "❤️",
+    "🚉"
+  ],
+  "reactions": {
+    "potd": {}
+  }
+}
