@@ -27,7 +27,7 @@ jobs:
       # Run all in single workflow to speedup process for (GH issue creation responsiveness)
       # Prepare artifacts
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: profile
       - name: Prepare directory with placeholder files if applicable
@@ -44,31 +44,26 @@ jobs:
           rm -rf artifacts/picture-of-the-day/
           git checkout artifacts/picture-of-the-day/picture-of-the-day.json
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: artifacts
           path: artifacts/
 
       # Generate profile
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: main
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: artifacts
           path: artifacts
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '14'
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: npm-
+          node-version: "14"
+          cache: "npm"
       - name: Install node dependencies
         run: npm ci
       - name: Get picture of the Day
@@ -97,9 +92,9 @@ jobs:
           --githubRepositoryOwner idelsink
           --githubRepository idelsink
           --output artifacts/reactions/picture-of-the-day.json
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: "3.9"
       - name: Install python dependencies
         run: pip install jinja2-cli
       - name: Generate Jinja2 input template file
