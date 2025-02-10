@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       picture-of-the-day-album:
-        default: 'Picture of the Day'
+        default: "Picture of the Day"
         type: string
       download-picture-of-the-day:
         default: true
@@ -117,12 +117,12 @@ jobs:
           --outfile=README.md
           README.md.j2
           artifacts/api.json
-      - uses: EndBug/add-and-commit@v8
+      - uses: EndBug/add-and-commit@v9
         name: Commit files
         with:
-          add: '.'
-          author_name: 'Botmar 🤖'
-          author_email: '🤖@dels.ink'
-          message: 'Publishing generated profile 🎉'
+          add: "."
+          author_name: "Botmar 🤖"
+          author_email: "🤖@dels.ink"
+          message: "Publishing generated profile 🎉"
           new_branch: profile
           push: origin --set-upstream HEAD --force
