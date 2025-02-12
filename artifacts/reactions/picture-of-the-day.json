@@ -1,0 +1,32 @@
+{
+  "😍": {
+    "count": 1,
+    "reaction": "😍",
+    "reactions": [
+      {
+        "reaction": "😍",
+        "url": "https://api.github.com/repos/idelsink/idelsink/issues/86",
+        "number": 86,
+        "user": {
+          "login": "idelsink",
+          "url": "https://api.github.com/users/idelsink"
+        }
+      }
+    ]
+  },
+  "🔥": {
+    "count": 1,
+    "reaction": "🔥",
+    "reactions": [
+      {
+        "reaction": "🔥",
+        "url": "https://api.github.com/repos/idelsink/idelsink/issues/87",
+        "number": 87,
+        "user": {
+          "login": "Mercotui",
+          "url": "https://api.github.com/users/Mercotui"
+        }
+      }
+    ]
+  }
+}
