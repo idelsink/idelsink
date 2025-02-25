@@ -1,0 +1,50 @@
+{
+  "potd": {
+    "id": "AJ7Nial4Vn-QTj0Vk4NY_QMjXrdqV4ASD84l_geKDgWZIfaihevWQeAnYF0A-rBV-FGtCgVOLmW0",
+    "description": "Leipzig Altes Rathaus's astronomical clock",
+    "mimeType": "image/jpeg",
+    "mediaMetadata": {
+      "creationTime": "2022-05-18T14:39:29.339Z",
+      "width": "3024",
+      "height": "4032"
+    },
+    "artifacts": {
+      "original": "picture-of-the-day-original.jpeg",
+      "minimized": "picture-of-the-day-minimized.webp"
+    },
+    "parsedMetadata": {
+      "creationTimeDateString": "Wed May 18 2022"
+    },
+    "previousIds": [
+      "AJ7Nialli9Cvd4NFTByrBvPC8AufFIzrHLCxcW836TbpqjbZiOfEgKGm9jydejyouNPvUnlAekLq",
+      "AJ7NianNQX9nW7hO5-Q0PBieondbSw0IYUgG2T6Z3FcAVSkpcEtECQwh83OI2HzdvcBy8SuUxez9",
+      "AJ7NianEM24HfTIcaSv_mI9rNWw6Qo_15O_vyngiBGWDHKlnyKKKrKUE4VJzxD26U-F4x8FGozp1",
+      "AJ7NiakPAIzHeYUxV53ney9KECvbtzU3BHXf5arA7BS6_67L_yp4ZYVA2fyl4tO4oEgD3kRB7ke8",
+      "AJ7NialNGrH515NEJA1vQZG7TqSf1LIqxR8GLwhpL2CRPW-svC2qhys63u673JTr01K4LvuHOrhS",
+      "AJ7Niak64X1OvFgui5zl5R6ypwWZHNE7YnRd_kfGSy5JHlHUrffQYPAbVVbFJzNUSVDHRwh8KaPC",
+      "AJ7NialpGMOA5yUJop3c8at_nME-Rufy8-gNQgR3bnU6g0nqKFAbgV4JV-9pFidWRd6pYqR9X7T8",
+      "AJ7NiakNFZ53yl28-BTBaAsGFkTTSlUVtOIAeLADG1XDpfMrnOSFERSFyYL_fqIrn9YMQbsp08-n",
+      "AJ7NialnxVb9OL6ycOL2FCmH0gDDSZH8bXLQSJuPYcYs8wHf7Ywe8am3EflW3mlgS-8brjy2mU8e",
+      "AJ7NialGjf5uKw4OogmGn6vW_wz5zsXSzzcJoiJGM1M5bXljHy_0_4Y4Wx_xxKyeugZCkDtbtYJ2",
+      "AJ7NiakwlLaVO_2AN2bTnAQwPsDeqodxcAhe8UMGjMNDfbvlGbZgIS8MkufMUmeoPmnQ0HrnmpL3",
+      "AJ7NialNIHTPEaAreqSgDWyo3kpN9FiRcRE5-9TTN4GPiN150XQLFUfkMOoIZP32dhMzMX-7rIBV",
+      "AJ7Niamk3mx7Xu4aUGLbRWeU1m9dEC6k_CybHR2JQrcFpI3jH0a0OuZ2Exhak5-noORUmKVaSpUa",
+      "AJ7NiakT5P-Re-rcOw95fXO2DesOElzvoj8uQzNnFvTF6wgyEqaZCcCNkbIlIG-_3MhdR1eZ54Ud",
+      "AJ7NiamReUZpPFd6Mjn6kKTlFDjoGoqghHy3pNaK3AZQGnh4rqipuhvXn-CWHBySmz_sHu3cnXTh",
+      "AJ7Niakxp6Gvmrku3rhRabAZUNp_Gc_6szjHyOqWL8dNAV2MGEkNFzdXhxR24OiGTvjo5ppoM09-",
+      "AJ7NiamH0k32qafZoE5JWRjsthEZQvuzMHxJyt1ezuaXcWHrNrIT11h4j7_MxH1ezjr3-RVFKZlQ",
+      "AJ7NiamETXk1L8XA9HUQFHyAlsZeJYi1bIOj5fmzWmHyjqrSkMhrRr4EQDgUCBntjBwbUnQoV3eo",
+      "AJ7NiakYurnEYvjj5uWjQdMqGf25eotjGJw66gMuel_g5GNMM9umFAx2KFWdWdpVpJRYpXkGn69x"
+    ]
+  },
+  "allowedReactions": [
+    "🎉",
+    "🔥",
+    "😍",
+    "😱",
+    "❤️"
+  ],
+  "reactions": {
+    "potd": {}
+  }
+}
