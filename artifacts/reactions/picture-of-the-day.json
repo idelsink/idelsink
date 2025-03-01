@@ -1,0 +1,41 @@
+{
+  "☁️": {
+    "count": 2,
+    "reaction": "☁️",
+    "reactions": [
+      {
+        "reaction": "☁️",
+        "url": "https://api.github.com/repos/idelsink/idelsink/issues/43",
+        "number": 43,
+        "user": {
+          "login": "idelsink",
+          "url": "https://api.github.com/users/idelsink"
+        }
+      },
+      {
+        "reaction": "☁️",
+        "url": "https://api.github.com/repos/idelsink/idelsink/issues/45",
+        "number": 45,
+        "user": {
+          "login": "hetisthijs",
+          "url": "https://api.github.com/users/hetisthijs"
+        }
+      }
+    ]
+  },
+  "❤️": {
+    "count": 1,
+    "reaction": "❤️",
+    "reactions": [
+      {
+        "reaction": "❤️",
+        "url": "https://api.github.com/repos/idelsink/idelsink/issues/46",
+        "number": 46,
+        "user": {
+          "login": "thumbnail",
+          "url": "https://api.github.com/users/thumbnail"
+        }
+      }
+    ]
+  }
+}
