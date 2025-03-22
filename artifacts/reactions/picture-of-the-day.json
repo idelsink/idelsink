@@ -1,0 +1,17 @@
+{
+  "😍": {
+    "count": 1,
+    "reaction": "😍",
+    "reactions": [
+      {
+        "reaction": "😍",
+        "url": "https://api.github.com/repos/idelsink/idelsink/issues/82",
+        "number": 82,
+        "user": {
+          "login": "idelsink",
+          "url": "https://api.github.com/users/idelsink"
+        }
+      }
+    ]
+  }
+}
