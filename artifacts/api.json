@@ -1,0 +1,65 @@
+{
+  "potd": {
+    "id": "AJ7NianNQX9nW7hO5-Q0PBieondbSw0IYUgG2T6Z3FcAVSkpcEtECQwh83OI2HzdvcBy8SuUxez9",
+    "description": "Tux says hi! 🐧",
+    "mimeType": "image/jpeg",
+    "mediaMetadata": {
+      "creationTime": "2018-07-07T14:25:10Z",
+      "width": "4208",
+      "height": "3120"
+    },
+    "artifacts": {
+      "original": "picture-of-the-day-original.jpeg",
+      "minimized": "picture-of-the-day-minimized.webp"
+    },
+    "parsedMetadata": {
+      "creationTimeDateString": "Sat Jul 07 2018"
+    },
+    "previousIds": [
+      "AJ7NiamETXk1L8XA9HUQFHyAlsZeJYi1bIOj5fmzWmHyjqrSkMhrRr4EQDgUCBntjBwbUnQoV3eo",
+      "AJ7Nialli9Cvd4NFTByrBvPC8AufFIzrHLCxcW836TbpqjbZiOfEgKGm9jydejyouNPvUnlAekLq",
+      "AJ7NianEM24HfTIcaSv_mI9rNWw6Qo_15O_vyngiBGWDHKlnyKKKrKUE4VJzxD26U-F4x8FGozp1",
+      "AJ7NialOkb3uObsO31shmxQ5Hjxd8eu0FOahYBu8VWgpYt1_w2Mh2y2rX768tl3NPBvN1M16Uwab",
+      "AJ7NianlWAezkjMhQl33gwRVh4uAryCYvU-DdTgARfoCinRZyv_0iRb48jlqncCmZamqAQg4xE6p",
+      "AJ7Nian0x2oopdYHTwVYllZdjjt2zaKT0zGekQCdsK9kE-w9kzjJrZ0DQkAOa3fXg2gKlqUZSaHR",
+      "AJ7NialC0yd6jIEaDkwVODbn4EXPEZpN3qXvUOSc2db6aWDE1OQnT0IKMulpoJXkO6aEitilOx4X",
+      "AJ7Niakxp6Gvmrku3rhRabAZUNp_Gc_6szjHyOqWL8dNAV2MGEkNFzdXhxR24OiGTvjo5ppoM09-",
+      "AJ7Nial1xNDnuqmHlqiE3_0ki5zDq13QV8p6wOjnIorpiTG-sqwg022mVdaJXJRqDy4WeoVSYpQO",
+      "AJ7Niamh0kSi8Sz_RrcijVNK24eWdvVfUFIb2qr3So7gTKvfmEYOOs55U2WpAHLRA6Avi6dh66H6",
+      "AJ7NialGjf5uKw4OogmGn6vW_wz5zsXSzzcJoiJGM1M5bXljHy_0_4Y4Wx_xxKyeugZCkDtbtYJ2",
+      "AJ7NialpGMOA5yUJop3c8at_nME-Rufy8-gNQgR3bnU6g0nqKFAbgV4JV-9pFidWRd6pYqR9X7T8",
+      "AJ7Nial3ie9k16XCsbQglSybywmlq1tnTr_09iwqVOHdalMfDFi7bepLG9tXb9XwllkA2JN5zAVQ",
+      "AJ7Nial7Shb4S8tVaswkhqQ0P7P2NqHZW3j39y9FrHdCf0ZmXdDX9G1YWORcpyYtCNoqCgkCgQuj",
+      "AJ7NialNGrH515NEJA1vQZG7TqSf1LIqxR8GLwhpL2CRPW-svC2qhys63u673JTr01K4LvuHOrhS",
+      "AJ7NiakM3HcwHGSUoF1jTP2bh_J1Q53ioWNIGJtKErQIpFiiWiNMly7CGKpIcy6tFh9NcRXFbdbS",
+      "AJ7NialStSyiUOfyyeOndxOvAOrdzaLosiLB0c-WgxoY2S01ue7HNL1Vew9ciNtek3Ar6uxkmN8O"
+    ]
+  },
+  "allowedReactions": [
+    "🎉",
+    "🔥",
+    "😍",
+    "😱",
+    "❤️",
+    "🐧"
+  ],
+  "reactions": {
+    "potd": {
+      "🐧": {
+        "count": 1,
+        "reaction": "🐧",
+        "reactions": [
+          {
+            "reaction": "🐧",
+            "url": "https://api.github.com/repos/idelsink/idelsink/issues/66",
+            "number": 66,
+            "user": {
+              "login": "idelsink",
+              "url": "https://api.github.com/users/idelsink"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
