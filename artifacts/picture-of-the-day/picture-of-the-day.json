@@ -1,0 +1,25 @@
+{
+  "id": "AJ7Nial8bnQLfVCHKKrj92GW9HseC123oxBXwpq8VOg1sQvvo0ztovFi-XzMCKM56yMNcqm_Gc6d",
+  "description": "Le voyage dans la lune 🌚",
+  "mimeType": "image/jpeg",
+  "mediaMetadata": {
+    "creationTime": "2021-07-22T21:05:23.812Z",
+    "width": "4032",
+    "height": "3024"
+  },
+  "artifacts": {
+    "original": "picture-of-the-day-original.jpeg",
+    "minimized": "picture-of-the-day-minimized.webp"
+  },
+  "parsedMetadata": {
+    "creationTimeDateString": "Thu Jul 22 2021"
+  },
+  "previousIds": [
+    "AJ7NianEM24HfTIcaSv_mI9rNWw6Qo_15O_vyngiBGWDHKlnyKKKrKUE4VJzxD26U-F4x8FGozp1",
+    "AJ7Nialli9Cvd4NFTByrBvPC8AufFIzrHLCxcW836TbpqjbZiOfEgKGm9jydejyouNPvUnlAekLq",
+    "AJ7NiakNFZ53yl28-BTBaAsGFkTTSlUVtOIAeLADG1XDpfMrnOSFERSFyYL_fqIrn9YMQbsp08-n",
+    "AJ7NiamEa4XIVKSmqYUf5jer0SBFiFIGd4nwW7xhx0mjJ5eBFEvzYjOTTNed-DYJBBFYorTsEYmp",
+    "AJ7Niakxp6Gvmrku3rhRabAZUNp_Gc_6szjHyOqWL8dNAV2MGEkNFzdXhxR24OiGTvjo5ppoM09-",
+    "AJ7NiakjGhIMSd7Sido2gZUhbWZjsFDR83d_n_yrwJd_-FODqGbEaUvQqOEiGfaqjLm2bXqYOjed"
+  ]
+}
