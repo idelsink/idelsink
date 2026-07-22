@@ -1,0 +1,17 @@
+{
+  "😱": {
+    "count": 1,
+    "reaction": "😱",
+    "reactions": [
+      {
+        "reaction": "😱",
+        "url": "https://api.github.com/repos/idelsink/idelsink/issues/98",
+        "number": 98,
+        "user": {
+          "login": "Mercotui",
+          "url": "https://api.github.com/users/Mercotui"
+        }
+      }
+    ]
+  }
+}
